@@ -1,0 +1,73 @@
+import axios from "axios";
+const BASE_URL = "http://localhost:7777/profile/"
+
+export const fetchUserRating = async(handle) => {
+    const fetchRatingsUrl = `localhost:7777/profile/${handle}?fetchRatings=true`;
+    try {
+        const ratings = await axios.get(fetchRatingsUrl);
+        console.log(ratings);
+        return ratings
+    } catch(err) {
+        return (`error: ${err} occured while fetching`);
+    }
+};
+
+
+export const fetchUserDetails = async(handle) => {
+    const fetchUserDetailsUrl = `${BASE_URL}${handle}`;
+    try {
+        const userDetailsJson = await axios.get(fetchUserDetailsUrl);
+        console.log(userDetailsJson.userDetails);
+        return userDetailsJson
+    } catch(err) {
+        return (`error: ${err} occured while fetching`);
+    }
+};
+
+export const saveUserToDatabase = async(user) => {
+    try {
+        console.log("Form data to be sent:", user);
+        const saveUserApiUrl = `${BASE_URL}saveToDatabase`;
+        const saveUserApiResponse = await axios.post(saveUserApiUrl, user);
+        const allUsers = saveUserApiResponse.data.allUsers;
+        console.log(allUsers);
+        console.log(saveUserApiResponse)
+
+        return allUsers;
+    } catch(err) {
+        console.error(err);
+    }
+};
+
+
+export const updateUserInDatabase = async(dataToUpdate) => {
+    try {
+        const updateUserApiUrl = `${BASE_URL}update`;
+        const allUsersJson = await axios.patch(updateUserApiUrl);
+    } catch(err) {
+        console.error(err);
+    }
+};
+
+
+export const deleteUserFromDatabase = async(dataToUpdate) => {
+    try {
+        const deleteUserApiUrl = `${BASE_URL}delete`;
+        const allUsersJson = await axios.patch(deleteUserApiUrl);
+    } catch(err) {
+        console.error(err);
+    }
+};
+
+
+export const fetchAllUsersFromDatabase = async() => {
+    try {
+        const fetchAllUsersApiUrl = `${BASE_URL}fetchAll`
+        const allUsersJson = await axios.get(fetchAllUsersApiUrl);
+
+    } catch(err) {
+        console.error(err);
+    }
+};
+
+

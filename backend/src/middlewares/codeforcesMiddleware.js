@@ -1,13 +1,15 @@
+require('dotenv').config();
 const { createHash } = require('crypto');
 const axios = require('axios');
 const { filterContestsByDate, filterUserDetailsByDate } = require('../utils/helper');
 
-require('dotenv').config();
 const { API_KEY, API_SECRET } = process.env;
 const BASE_URL = 'https://codeforces.com/api/';
 
 const fetchCodeforcesUserProfile = async (req, resp, next) => {
-  const { handle } = req.params;
+  const handle = req.params.handle || req.body.handle;
+  // const handle = req.body.handle;
+  const fetchRatings = req.query.fetchRatings === 'true';
 
   try {
     const currentTime = Math.floor(Date.now() / 1000);
@@ -19,9 +21,14 @@ const fetchCodeforcesUserProfile = async (req, resp, next) => {
 
     const apiUrl = `${BASE_URL}${method}?${params}&apiSig=${apiSig}`;
     const apiResponse = await axios.get(apiUrl);
+    const codeforcesUserDetails = apiResponse.data.result[0]; 
+    console.log(codeforcesUserDetails);
 
-    req.codeforcesUser = apiResponse.data.result[0]; 
+    req.userDetails = codeforcesUserDetails;
+    req.currentRating = codeforcesUserDetails.rating;
+    req.maxRating = codeforcesUserDetails.maxRating;
     next();
+
   } catch (err) {
     resp.status(400).json({
       message: "Failed to fetch Codeforces profile: " + err.message,
@@ -29,6 +36,7 @@ const fetchCodeforcesUserProfile = async (req, resp, next) => {
     });
   }
 };
+
 
 const fetchCodeforcesUserContestHistory = async (req, resp, next) => {
     const { handle } = req.params;
@@ -68,7 +76,12 @@ const fetchCodeforcesUserStatus = async(req, resp, next) => {
         data: null
         });
   }
-}
+};
+
+
+
+/* -------------------------------------------------------------------------------------------------------- */
+
 
 module.exports = {
   fetchCodeforcesUserProfile,

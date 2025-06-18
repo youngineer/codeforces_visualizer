@@ -12,7 +12,7 @@ function App() {
         <BrowserRouter basename="/">
           <Routes>
             <Route path="/" element={<Body />}>
-              <Route path="/dashboard" element={<Dashboard />}></Route>
+              <Route path="/" element={<Dashboard />}></Route>
               <Route path="/profile" element={<Profile />}></Route>
             </Route>
           </Routes>
@@ -23,3 +23,13 @@ function App() {
 }
 
 export default App
+
+
+// { field: 'name', headerName: 'Name', width: 180, editable: true },
+//     { field: 'handle', headerName: 'CF Handle', width: 120, editable: true },
+//     { field: 'currentRating', headerName: 'Current Rating', width: 120, editable: true },
+//     { field: 'maxRating', headerName: 'Max Rating', width: 120, editable: true },
+//     { field: 'emailId', headerName: 'E-mail', width: 180, editable: true },
+//     { field: 'phoneNumber', headerName: 'Contact Number', width: 160, editable: true },
+//     { field: 'updatedAt', headerName: 'Updated At', width: 120, editable: true },
+    

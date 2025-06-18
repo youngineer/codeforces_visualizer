@@ -1,18 +1,21 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardActions from '@mui/material/CardActions';
+import { fetchUserDetails } from '@/services/helper';
 
 export default function ProfileCard() {
+  
+
     const goToCodeforcesProfile = () => {
 
-    }
+    };
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} className='flex justify-center'>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -21,19 +24,12 @@ export default function ProfileCard() {
           alt="user profile photo"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h5" component="div" className='text-blue-600 underline' onClick={goToCodeforcesProfile}>
             Lizard
-          </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={goToCodeforcesProfile}>
-          Codeforces Profile
-        </Button>
       </CardActions>
     </Card>
   );

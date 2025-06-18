@@ -7,33 +7,33 @@ const studentSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-        validate(value) {
-            const regex = /^[a-zA-Z]{4,}$/;
-            if(!regex.test(value)) {
-                throw new Error("Invalid name. It must be at least 4 characters long and can only contain letters.")
-            }
-        }
+        // validate(value) {
+        //     const regex = /^[a-zA-Z]{4,}$/;
+        //     if(!regex.test(value)) {
+        //         throw new Error("Invalid name. It must be at least 4 characters long and can only contain letters.")
+        //     }
+        // }
     },
     emailId: {
         type: String,
         trim: true,
-        requires: true,
-        validate(value) {
-            if(!validator.isEmail(value)) {
-                throw new Error("Invalid email");
-            }
-        }
+        required: true,
+        // validate(value) {
+        //     if(!validator.isEmail(value)) {
+        //         throw new Error("Invalid email");
+        //     }
+        // }
     },
     phoneNumber: {
         type: String,
         required: true,
-        validate(value) {
-            if(!validator.isMobilePhone(value)) {
-                throw new Error("Invalid phone number");
-            }
-        }
+        // validate(value) {
+        //     if(!validator.isMobilePhone(value)) {
+        //         throw new Error("Invalid phone number");
+        //     }
+        // }
     },
-    codeforcesHandle: {
+    handle: {
         type: String,
         required: true,
         trim: true,
