@@ -1,6 +1,10 @@
 # Codeforces Profile Visualizer
 
-Demo: https://drive.google.com/file/d/1zppjmCFxDIQg0GNLcKHCbzmvN0N7mmgs/view?usp=drive_link
+
+
+https://github.com/user-attachments/assets/dd02862c-95ec-4a82-abc7-1f19885173c1
+
+
 
 This project allows users to fetch and visualize Codeforces profile data. It supports full CRUD operations on user profiles, enriched with contest and problem-solving statistics.
 
