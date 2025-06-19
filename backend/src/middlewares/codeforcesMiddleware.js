@@ -22,7 +22,6 @@ const fetchCodeforcesUserProfile = async (req, resp, next) => {
     const apiUrl = `${BASE_URL}${method}?${params}&apiSig=${apiSig}`;
     const apiResponse = await axios.get(apiUrl);
     const codeforcesUserDetails = apiResponse.data.result[0]; 
-    console.log(codeforcesUserDetails);
 
     req.userDetails = codeforcesUserDetails;
     req.currentRating = codeforcesUserDetails.rating;
@@ -40,7 +39,7 @@ const fetchCodeforcesUserProfile = async (req, resp, next) => {
 
 const fetchCodeforcesUserContestHistory = async (req, resp, next) => {
     const { handle } = req.params;
-    const days = parseInt(req.query.filterDays) || 30;
+    const days = parseInt(req.query.filterDays) || 365;
 
     try {
         const contestsAttendedByHandleApi = `${BASE_URL}user.rating?handle=${handle}`;
@@ -67,7 +66,6 @@ const fetchCodeforcesUserStatus = async(req, resp, next) => {
     const userStatusApiResponse = await axios.get(userStatusApi);
     const filteredData = await filterUserDetailsByDate(userStatusApiResponse.data.result, days);
     req.codeforcesUserStatus = filteredData;
-    console.log(filteredData);
     next();
 
   } catch (err) {
@@ -77,6 +75,11 @@ const fetchCodeforcesUserStatus = async(req, resp, next) => {
         });
   }
 };
+
+
+const fetchProfilePageInformation = async(req, resp, next) => {
+  const handle = req.params.handle || req.query.handle;
+}
 
 
 

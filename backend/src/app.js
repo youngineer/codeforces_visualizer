@@ -15,9 +15,7 @@ connectDb()
     })
     .catch(err => console.error(`${err} occured`));
 
-// app.listen(7777, () => {
-//             console.log("Server connected successfully on port 7777");
-//         })
+    
 app.use("/", userRouter);
 
 

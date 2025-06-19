@@ -25,7 +25,7 @@ const getDateFromUnix = (timestamp) => {
     const mm = String(date.getMonth() + 1).padStart(2, '0');  
     const yyyy = date.getFullYear();
 
-    return `${yyyy}-${mm}-${dd}`;  
+    return `${yyyy}/${mm}/${dd}`;  
 }
 
 
@@ -97,12 +97,10 @@ const filterUserDetailsByDate = async(submissions, days) => {
     const heatMapData = {};
 
     submissions.forEach((submission) => {
-        // console.log(submission.verdict == "OK")
-        // console.log(submission.creationTimeSeconds >= minUnixTime)
         if(submission.verdict == "OK" && submission.creationTimeSeconds >= minUnixTime) {
             totalSolved++;
 
-            const rating = submission.rating || 0;
+            const rating = submission.problem.rating || 0;
             totalRating += rating;
             mostDifficultRating = Math.max(mostDifficultRating, rating);
 
@@ -127,9 +125,6 @@ const filterUserDetailsByDate = async(submissions, days) => {
         heatMapData
     };
 };
-
-
-
 
 
 module.exports = {

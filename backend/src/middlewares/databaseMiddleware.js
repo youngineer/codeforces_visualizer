@@ -6,7 +6,13 @@ const saveUserToDatabase = async(req, resp, next) => {
     const currentRating = req.currentRating;
     const { name, emailId, phoneNumber, handle } = req.body;
 
-    const student = new Student({
+    const handleInDb = await Student.findOne({handle: handle});
+    if(handleInDb) {
+      const updatedStudent = await Student.findOneAndUpdate({ handle: handle },
+      dataToUpdate,{
+      returnDocument:'after'});
+    } else {
+      const student = new Student({
       name: name, 
       emailId: emailId,
       phoneNumber: phoneNumber,
@@ -22,6 +28,8 @@ const saveUserToDatabase = async(req, resp, next) => {
       }).catch(err => {
         resp.status(400).json({message: `Error saving the user: + ${err.message}`, data: null});
       });
+    }
+
 
     const allUsers = await Student.find({});
     req.allUsers = allUsers;
@@ -73,11 +81,13 @@ const editUserinDatabase = async (req, resp, next) => {
 
 const fetchAllUsersFromDatabase = async(req, resp, next) => {
     try {
+      console.log("inside fetchAllUsersFromDatabase")
         const allUsers = await Student.find({});
         req.allUsers = allUsers;
+        console.log(allUsers);
         next();
     } catch (err) {
-    resp.status(400).json({ message: `Error saving the user: ${err.message}`, data: null });
+    resp.status(400).json({ message: `Error fetching the users: ${err.message}`, data: null });
   }
 }
 

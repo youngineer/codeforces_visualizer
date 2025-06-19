@@ -5,7 +5,6 @@ export const fetchUserRating = async(handle) => {
     const fetchRatingsUrl = `localhost:7777/profile/${handle}?fetchRatings=true`;
     try {
         const ratings = await axios.get(fetchRatingsUrl);
-        console.log(ratings);
         return ratings
     } catch(err) {
         return (`error: ${err} occured while fetching`);
@@ -15,10 +14,19 @@ export const fetchUserRating = async(handle) => {
 
 export const fetchUserDetails = async(handle) => {
     const fetchUserDetailsUrl = `${BASE_URL}${handle}`;
+    const fetchUserContestDetailsUrl = `${BASE_URL}userContestData/${handle}`;
+    const fetchUserStatusDetailsUrl = `${BASE_URL}userStatus/${handle}`;
+    // const userDetails = {};
     try {
-        const userDetailsJson = await axios.get(fetchUserDetailsUrl);
-        console.log(userDetailsJson.userDetails);
-        return userDetailsJson
+        const userDetailsResponse = await axios.get(fetchUserDetailsUrl);
+        const userContestDetailsResponse = await axios.get(fetchUserContestDetailsUrl);
+        const userStatusDetailsResponse = await axios.get(fetchUserStatusDetailsUrl);
+        
+        const userDetails = userDetailsResponse.data.data;
+        const userContestDetails = userContestDetailsResponse.data.data;
+        const userStatusDetails = userStatusDetailsResponse.data.data;
+        
+        return { userDetails, userContestDetails, userStatusDetails }
     } catch(err) {
         return (`error: ${err} occured while fetching`);
     }
@@ -26,12 +34,9 @@ export const fetchUserDetails = async(handle) => {
 
 export const saveUserToDatabase = async(user) => {
     try {
-        console.log("Form data to be sent:", user);
         const saveUserApiUrl = `${BASE_URL}saveToDatabase`;
         const saveUserApiResponse = await axios.post(saveUserApiUrl, user);
         const allUsers = saveUserApiResponse.data.allUsers;
-        console.log(allUsers);
-        console.log(saveUserApiResponse)
 
         return allUsers;
     } catch(err) {

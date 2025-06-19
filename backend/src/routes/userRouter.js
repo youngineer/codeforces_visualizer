@@ -5,6 +5,7 @@ const {
   fetchCodeforcesUserStatus
 } = require("../middlewares/codeforcesMiddleware");
 const { saveUserToDatabase, editUserinDatabase, deleteUserFromDatabase, fetchAllUsersFromDatabase } = require("../middlewares/databaseMiddleware");
+const { Student } = require("../models/student");
 
 const userRouter = express.Router();
 
@@ -12,7 +13,7 @@ const userRouter = express.Router();
 userRouter.get("/profile/:handle", fetchCodeforcesUserProfile, async(req, resp) => {
   resp.status(200).json({
     // message: `User ${req.codeforcesUser.handle} retrieved successfully`,
-    data: req.response
+    data: req.userDetails
   });
 });
 
@@ -59,11 +60,21 @@ userRouter.delete("/profile/delete", deleteUserFromDatabase, async(req, resp) =>
 });
 
 
-userRouter.get("profile/fetchAll", fetchAllUsersFromDatabase, async(req, resp) => {
-  resp.status(201).json({
-    message: `User deleted successfully from the database`,
-    allUsers: req.allUsers
+userRouter.get("/profile/fetchAll", async(req, resp) => {
+  console.log("GET /profile/fetchAll hit!");
+  try {
+    const allUsers = await Student.find({});
+    console.log("Users:", allUsers);
+    resp.status(201).json({
+    message: `Users fetched successfully from the database`,
+    data: allUsers
   });
+  } catch (error) {
+    resp.status(404).json({
+      message: `Error fetching all users`,
+      data: null
+    })
+  }
 });
 
 
