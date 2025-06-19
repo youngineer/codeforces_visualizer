@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import LineGraph from './LineGraph';
 
 const ContestHistory = ({ props }) => {
   const contestData = props || {};
+  const [prevDays, setPrevDays] = useState(365);
+
+  useEffect({
+
+  }, [prevDays]);
   
   return (
     <div className="bg-gradient-to-br from-blue-50 to-indigo-100 backdrop-blur-sm border border-blue-200/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">

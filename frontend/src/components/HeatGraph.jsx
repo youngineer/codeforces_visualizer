@@ -10,6 +10,11 @@ const HeatGraph = (props) => {
         values.push({ date: day, count: solved });
     });
 
+    const today = new Date();
+    const oneYearBack = new Date();
+    oneYearBack.setFullYear(today.getFullYear() - 1);
+
+    console.log(oneYearBack.toISOString().split('T')[0]);
 
 
   return (
@@ -17,7 +22,7 @@ const HeatGraph = (props) => {
       value={values}
       width={600}
       style={{ color: '4ea37d', '--rhm-rect-active': 'green' }}
-      startDate={new Date('2025/01/01')}
+      startDate={oneYearBack}
       panelColors={[
         '#e0f2e9', 
         '#b3e2c8',

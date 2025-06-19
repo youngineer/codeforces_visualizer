@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
-import Table from './Table';
+import React from 'react'
+import Table from './Table'
 
 const Dashboard = () => {
-
   return (
-    <div>
-      <Table />
-    </div>
+    <div><Table /></div>
   )
-};
+}
 
-export default Dashboard;
+export default Dashboard

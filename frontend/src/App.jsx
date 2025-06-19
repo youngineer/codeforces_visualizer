@@ -13,7 +13,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Body />}>
               <Route path="/" element={<Dashboard />}></Route>
-              <Route path="/profile" element={<Profile />}></Route>
+              <Route path="/profile/:handle" element={<Profile />}></Route>
             </Route>
           </Routes>
         </BrowserRouter>

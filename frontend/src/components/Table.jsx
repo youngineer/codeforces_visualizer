@@ -15,7 +15,8 @@ export default function Table() {
     const mapped = rows.map((r, i) => ({
       ...r,
       no: i + 1,
-      updatedAt: r.updatedAt ? new Date(r.updatedAt) : null, // FIXED
+      id: r._id,
+      updatedAt: r.updatedAt ? new Date(r.updatedAt) : null, 
     }));
     setRawRows(mapped);
   };
@@ -47,6 +48,7 @@ export default function Table() {
       };
 
       const allUsers = await saveUserToDatabase(newUser);
+      console.log(allUsers)
 
       const enrichedUsers = allUsers.map((u, index) => ({
         ...u,
@@ -138,6 +140,13 @@ export default function Table() {
       onDeleteRow={onDeleteRow}
       createRowData={createRowData}
       loading={loading}
+      onRowClick={(params) => {
+        const handle = params.row.handle;
+        if (handle) {
+          const url = `http://localhost:5173/profile/${handle}`;
+          window.open(url, "_blank");
+        }
+      }}
     />
   );
 }

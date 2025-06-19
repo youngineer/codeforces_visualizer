@@ -25,6 +25,7 @@ export const fetchUserDetails = async(handle) => {
         const userDetails = userDetailsResponse.data.data;
         const userContestDetails = userContestDetailsResponse.data.data;
         const userStatusDetails = userStatusDetailsResponse.data.data;
+        console.log(userDetails, userContestDetails, userStatusDetails)
         
         return { userDetails, userContestDetails, userStatusDetails }
     } catch(err) {

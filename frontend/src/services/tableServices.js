@@ -85,7 +85,7 @@ export const fetchAllUsersFromDatabase = async() => {
         const fetchAllUsersApiUrl = `${BASE_URL}fetchAll`
         const allUsersJson = await axios.get(fetchAllUsersApiUrl);
 
-        console.log(allUsersJson.data)
+        return allUsersJson.data.data;
     } catch(err) {
         console.error(err);
     }

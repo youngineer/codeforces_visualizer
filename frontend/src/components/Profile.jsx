@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { fetchUserDetails } from '@/services/helper';
 import ContestHistory from './ContestHistory';
 import ProblemSolvingData from './ProblemSolvingData';
+import { useParams } from 'react-router';
 
-const Profile = ({ handle }) => {
+const Profile = () => {
+  const { handle } = useParams();
   const [contestHistoryData, setContestHistoryData] = useState(null);
   const [problemSolvedData, setProblemSolvedData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -12,7 +14,7 @@ const Profile = ({ handle }) => {
     const loadProfile = async () => {
       try {
         setLoading(true);
-        const { userDetails, userContestDetails, userStatusDetails } = await fetchUserDetails("ecnerwala");
+        const { userDetails, userContestDetails, userStatusDetails } = await fetchUserDetails(handle);
         setProblemSolvedData(userStatusDetails);
         setContestHistoryData(userContestDetails);
         
