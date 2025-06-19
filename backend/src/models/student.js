@@ -30,11 +30,26 @@ const studentSchema = new Schema({
     required: true
   },
   userStatus: {
-    totalSolved: { type: Number, default: 0 },
-    totalRating: { type: Number, default: 0 },
-    mostDifficultRating: { type: Number, default: 0 },
-    ratingBuckets: { type: Map, of: Number, default: {} },
-    heatMapData: { type: Map, of: Number, default: {} }
+  totalSolved: { type: Number, default: 0 },
+  averageRating: { type: Number, default: 0 },
+  mostDifficultRating: { type: Number, default: 0 },
+  averagePerDay: { type: Number, default: 0 },
+  ratingBuckets: {
+    type: Map,
+    of: new mongoose.Schema({
+      count: { type: Number, required: true },
+      date: { type: String }
+    }),
+    default: {}
+  },
+    heatMapData: {
+      type: Map,
+      of: new mongoose.Schema({
+        count: { type: Number, required: true },
+        date: { type: Date, default: Date.now }
+      }),
+      default: {}
+    }
   },
   contestHistory: {
     type: Map,
@@ -42,7 +57,8 @@ const studentSchema = new Schema({
       rank: { type: Number },
       oldRating: { type: Number },
       newRating: { type: Number },
-      unsolvedProblems: { type: Number }
+      unsolvedProblems: { type: Number },
+      date: {type: String}
     }),
     default: {}
   }

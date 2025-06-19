@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import BarGraph from './BarGraph';
 import HeatGraph from './HeatGraph';
+import { continuousColorLegendClasses } from '@mui/x-charts';
 
 const ProblemSolvingData = ({ props }) => {
+  console.log(props)
   const {
     averagePerDay = 0.62,
     averageRating = 0,

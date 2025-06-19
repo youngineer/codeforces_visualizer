@@ -14,9 +14,6 @@ const HeatGraph = (props) => {
     const oneYearBack = new Date();
     oneYearBack.setFullYear(today.getFullYear() - 1);
 
-    console.log(oneYearBack.toISOString().split('T')[0]);
-
-
   return (
     <HeatMap
       value={values}

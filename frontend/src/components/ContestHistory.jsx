@@ -5,18 +5,14 @@ const ContestHistory = ({ props }) => {
   const contestData = props || {};
   const [prevDays, setPrevDays] = useState(365);
 
-  useEffect({
-
+  useEffect(() => {
+    //TODO add filters
   }, [prevDays]);
-  
+
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-100 backdrop-blur-sm border border-blue-200/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
-      <div className="flex items-center gap-3 mb-6">
-        <h3 className="text-xl font-bold text-gray-800">Contest Performance</h3>
-      </div>
-      <div className="bg-white/60 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-        <LineGraph props={contestData} />
-      </div>
+    <div className="bg-white rounded-lg p-6 shadow">
+      <h3 className="text-xl font-bold mb-4">Contest Performance</h3>
+      <LineGraph props={contestData} />
     </div>
   );
 };

@@ -13,22 +13,13 @@ export const fetchUserRating = async(handle) => {
 
 
 export const fetchUserDetails = async(handle) => {
-    const fetchUserDetailsUrl = `${BASE_URL}${handle}`;
-    const fetchUserContestDetailsUrl = `${BASE_URL}userContestData/${handle}`;
-    const fetchUserStatusDetailsUrl = `${BASE_URL}userStatus/${handle}`;
-    // const userDetails = {};
     try {
-        const userDetailsResponse = await axios.get(fetchUserDetailsUrl);
-        const userContestDetailsResponse = await axios.get(fetchUserContestDetailsUrl);
-        const userStatusDetailsResponse = await axios.get(fetchUserStatusDetailsUrl);
-        
-        const userDetails = userDetailsResponse.data.data;
-        const userContestDetails = userContestDetailsResponse.data.data;
-        const userStatusDetails = userStatusDetailsResponse.data.data;
-        console.log(userDetails, userContestDetails, userStatusDetails)
-        
-        return { userDetails, userContestDetails, userStatusDetails }
-    } catch(err) {
+        const fetchUSerDetailsUrl = `${BASE_URL}${handle}`;
+        const fetchAllUsersApiResponse = await axios.get(fetchUSerDetailsUrl);
+        const { name, userStatus, contestHistory } = fetchAllUsersApiResponse.data.data;
+        const studentName = name;
+        return { studentName, userStatus, contestHistory }
+    } catch (err) {
         return (`error: ${err} occured while fetching`);
     }
 };

@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { createHash } = require('crypto');
 const axios = require('axios');
-const { filterContestsByDate, filterUserDetailsByDate, fetchRatingsFromApiResponse, filterOneYearUserDetails, filterOneYearContests } = require('../utils/helper');
+const { fetchRatingsFromApiResponse,  filterOneYearContests, filter90DaysUserDetails } = require('../utils/helper');
 
 const { API_KEY, API_SECRET } = process.env;
 const BASE_URL = 'https://codeforces.com/api/';
@@ -86,12 +86,11 @@ const fetchProfileInformation = async(req, resp, next) => {
     const userStatusDays = req.body.filterDays || 365;
     const userStatusApi = `${BASE_URL}user.status?handle=${handle}`;
     const userStatusApiResponse = await axios.get(userStatusApi);
-    const filteredUserStatusData = await filterOneYearUserDetails(userStatusApiResponse.data.result);
+    const filteredUserStatusData = filter90DaysUserDetails(userStatusApiResponse.data.result);
 
     const contestsAttendedApi = `${BASE_URL}user.rating?handle=${handle}`;
     const contestsAttendedApiResponse = await axios.get(contestsAttendedApi);
     const filteredUserContestData = await filterOneYearContests(contestsAttendedApiResponse.data.result, handle);
-
 
     const userInformationApi = `${BASE_URL}user.info?handles=${handle}`;
     const userInformationResponse = await axios.get(userInformationApi);
