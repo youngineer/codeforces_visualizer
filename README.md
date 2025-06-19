@@ -5,7 +5,6 @@ Demo: https://drive.google.com/file/d/1zppjmCFxDIQg0GNLcKHCbzmvN0N7mmgs/view?usp
 This project allows users to fetch and visualize Codeforces profile data. It supports full CRUD operations on user profiles, enriched with contest and problem-solving statistics.
 
 ## Features
-
 - Add Codeforces users and fetch their data
 - View contest history and problem-solving heatmap
 - Edit or delete users
@@ -14,7 +13,6 @@ This project allows users to fetch and visualize Codeforces profile data. It sup
 - Backend built with Express and MongoDB
 
 ## API Endpoints
-
 GET /profile/fetchAll  
 Fetch all users from the database  
 Response:  
